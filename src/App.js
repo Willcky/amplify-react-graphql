@@ -34,11 +34,8 @@ const App = ({ signOut }) => {
     await Promise.all(
       notesFromAPI.map(async (note) => {
         if (note.image) {
-          const name = note.name
-          const url = await getUrl({
-            name
-          });
-          note.image = url;
+          const url = await getUrl({ key: note.name });
+          note.image = url.url;  
         }
         return note;
       })
@@ -47,47 +44,30 @@ const App = ({ signOut }) => {
   }
 
   async function createNote(event) {
-    const form = event.target;
-
     event.preventDefault();
-
-    const formData = new FormData(form);
-    const image = formData.get("image");
-    console.log(image);
+    const form = new FormData(event.target);
+    const image = form.get("image");
     const data = {
-      name: formData.get("name"),
-      description: formData.get("description"),
+      name: form.get("name"),
+      description: form.get("description"),
       image: image.name,
     };
-    const name = data.name;
-    try {
-      if (!!data.image) {
-         uploadData({
-          name,
-          image,
-        });
-      }
-    } catch (error) {
-      console.error('Error uploading file:', error);
-    }
-  
+    if (!!data.image) await uploadData({
+      key: data.name,
+      data: image
+    });
     await client.graphql({
       query: createNoteMutation,
       variables: { input: data },
     });
-
-    await fetchNotes();
-
-    form.reset();
+    fetchNotes();
+    event.target.reset();
   }
 
   async function deleteNote({ id, name }) {
     const newNotes = notes.filter((note) => note.id !== id);
-
     setNotes(newNotes);
-    await remove({
-      name,
-    })
+    await remove({ key: name });
     await client.graphql({
       query: deleteNoteMutation,
       variables: { input: { id } },
