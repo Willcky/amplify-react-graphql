@@ -52,7 +52,7 @@ const App = ({ signOut }) => {
     event.preventDefault();
 
     const formData = new FormData(form);
-    const image = form.get("image");
+    const image = formData.get("image");
     const data = {
       name: formData.get("name"),
       description: formData.get("description"),
