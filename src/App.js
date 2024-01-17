@@ -60,11 +60,17 @@ const App = ({ signOut }) => {
       image: image.name,
     };
     const name = data.name;
-    if (!!data.image){ uploadData({
-      name,
-      image,
-    });
+    try {
+      if (!!data.image) {
+         uploadData({
+          name,
+          image,
+        });
+      }
+    } catch (error) {
+      console.error('Error uploading file:', error);
     }
+  
     await client.graphql({
       query: createNoteMutation,
       variables: { input: data },
