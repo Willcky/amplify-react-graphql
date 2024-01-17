@@ -31,11 +31,13 @@ const App = ({ signOut }) => {
   async function fetchNotes() {
     const apiData = await client.graphql({ query: listNotes });
     const notesFromAPI = apiData.data.listNotes.items;
+    
     await Promise.all(
       notesFromAPI.map(async (note) => {
         if (note.image) {
           const url = await getUrl({ key: note.name });
           note.image = url.url;  
+          console.log("fetch image: ", note.image)
         }
         return note;
       })
