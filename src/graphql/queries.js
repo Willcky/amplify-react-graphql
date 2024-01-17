@@ -24,6 +24,7 @@ export const listNotes = /* GraphQL */ `
         id
         name
         description
+        image
         createdAt
         updatedAt
         __typename
