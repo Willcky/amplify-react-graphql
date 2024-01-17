@@ -53,16 +53,18 @@ const App = ({ signOut }) => {
 
     const formData = new FormData(form);
     const image = formData.get("image");
+    console.log(image);
     const data = {
       name: formData.get("name"),
       description: formData.get("description"),
       image: image.name,
     };
     const name = data.name;
-    if (!!data.image) uploadData({
+    if (!!data.image){ uploadData({
       name,
       image,
     });
+    }
     await client.graphql({
       query: createNoteMutation,
       variables: { input: data },
@@ -114,7 +116,7 @@ const App = ({ signOut }) => {
         <View
           name="image"
           as="input"
-          type="file"
+          type="File"
           style={{ alignSelf: "end" }}
         />
       </View>
