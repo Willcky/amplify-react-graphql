@@ -29,7 +29,15 @@ const App = ({ signOut }) => {
   }, []);
 
   async function fetchNotes() {
-    const apiData = await client.graphql({ query: listNotes });
+    const username = await currentAuthenticatedUser();
+    if (!username) {
+      setNotes([]);
+      return;
+    }
+    const apiData = await client.graphql({ 
+      query: listNotes,
+      variables: { filter: { owner: { eq: username } } }
+    });
     const notesFromAPI = apiData.data.listNotes.items;
     
     await Promise.all(
