@@ -2,11 +2,16 @@
 // this is an auto generated file. This will be overwritten
 
 export const onCreateNote = /* GraphQL */ `
-  subscription OnCreateNote($filter: ModelSubscriptionNoteFilterInput) {
-    onCreateNote(filter: $filter) {
+  subscription OnCreateNote(
+    $filter: ModelSubscriptionNoteFilterInput
+    $owner: String
+  ) {
+    onCreateNote(filter: $filter, owner: $owner) {
       id
       name
       description
+      image
+      owner
       createdAt
       updatedAt
       __typename
@@ -14,11 +19,16 @@ export const onCreateNote = /* GraphQL */ `
   }
 `;
 export const onUpdateNote = /* GraphQL */ `
-  subscription OnUpdateNote($filter: ModelSubscriptionNoteFilterInput) {
-    onUpdateNote(filter: $filter) {
+  subscription OnUpdateNote(
+    $filter: ModelSubscriptionNoteFilterInput
+    $owner: String
+  ) {
+    onUpdateNote(filter: $filter, owner: $owner) {
       id
       name
       description
+      image
+      owner
       createdAt
       updatedAt
       __typename
@@ -26,11 +36,16 @@ export const onUpdateNote = /* GraphQL */ `
   }
 `;
 export const onDeleteNote = /* GraphQL */ `
-  subscription OnDeleteNote($filter: ModelSubscriptionNoteFilterInput) {
-    onDeleteNote(filter: $filter) {
+  subscription OnDeleteNote(
+    $filter: ModelSubscriptionNoteFilterInput
+    $owner: String
+  ) {
+    onDeleteNote(filter: $filter, owner: $owner) {
       id
       name
       description
+      image
+      owner
       createdAt
       updatedAt
       __typename
