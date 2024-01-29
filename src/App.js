@@ -18,7 +18,7 @@ import {
 } from "./graphql/mutations";
 import { getUrl, uploadData, remove } from 'aws-amplify/storage';
 import { generateClient } from "aws-amplify/api";
-
+import { getCurrentUser } from 'aws-amplify/auth';
 const client = generateClient();
 
 const App = ({ signOut }) => {
@@ -44,15 +44,28 @@ const App = ({ signOut }) => {
     );
     setNotes(notesFromAPI);
   }
+  async function currentAuthenticatedUser() {
+    try {
+      const { username } = await getCurrentUser();
+      return username;
+    } catch (err) {
+      return null;
+    }
+  }
 
   async function createNote(event) {
     event.preventDefault();
     const form = new FormData(event.target);
     const image = form.get("image");
+    const username = await currentAuthenticatedUser();
+    if(!username){
+      console.log("get username failed");
+    }
     const data = {
       name: form.get("name"),
       description: form.get("description"),
       image: image.name,
+      owner: username,
     };
     if (!!data.image) await uploadData({
       key: data.name,
