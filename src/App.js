@@ -34,6 +34,7 @@ const App = ({ signOut }) => {
       setNotes([]);
       return;
     }
+    console.log(username);
     const apiData = await client.graphql({ 
       query: listNotes,
       variables: { filter: { owner: { eq: username } } }
