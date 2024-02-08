@@ -1,0 +1,39 @@
+# This "input" configures a global authorization rule to enable public access to
+# all models in this schema. Learn more about authorization rules here: https://docs.amplify.aws/cli/graphql/authorization-rules
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Query {
+    listNotes: [Note]
+}
+
+type Mutation {
+    createNote(input: CreateNoteInput!): Note
+    updateNote(id: ID!, input: UpdateNoteInput!): Note
+    deleteNote(id: ID!): Note
+}
+
+type Note {
+    id: ID!
+    name: String!
+    description: String
+    image: String
+    owner: String
+}
+
+input CreateNoteInput {
+    name: String!
+    description: String
+    image: String
+    owner: String
+}
+
+input UpdateNoteInput {
+    name: String
+    description: String
+    image: String
+    owner: String
+}
+
