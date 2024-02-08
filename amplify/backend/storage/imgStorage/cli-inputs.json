@@ -1,0 +1,14 @@
+{
+  "resourceName": "imgStorage",
+  "policyUUID": "7516e865",
+  "bucketName": "amplifyreacta29c87c226d940b6b50500c95d9894c0",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

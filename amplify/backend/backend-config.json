@@ -42,5 +42,16 @@
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
     }
+  },
+  "storage": {
+    "dynamoDB1": {
+      "providerPlugin": "awscloudformation",
+      "service": "DynamoDB"
+    },
+    "imgStorage": {
+      "dependsOn": [],
+      "providerPlugin": "awscloudformation",
+      "service": "S3"
+    }
   }
 }

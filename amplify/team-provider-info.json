@@ -17,6 +17,10 @@
       },
       "api": {
         "amplifyreact": {}
+      },
+      "storage": {
+        "imgStorage": {},
+        "dynamoDB1": {}
       }
     }
   }

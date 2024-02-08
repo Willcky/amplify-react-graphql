@@ -19,6 +19,7 @@ import {
 import { getUrl, uploadData, remove } from 'aws-amplify/storage';
 import { generateClient } from "aws-amplify/api";
 import { getCurrentUser } from 'aws-amplify/auth';
+import { v4 as uuidv4 } from 'uuid';
 const client = generateClient();
 
 const App = ({ signOut }) => {
@@ -36,8 +37,7 @@ const App = ({ signOut }) => {
     }
     console.log(username);
     const apiData = await client.graphql({ 
-      query: listNotes,
-      variables: { filter: { owner: { eq: username } } }
+      query: listNotes
     });
     const notesFromAPI = apiData.data.listNotes.items;
     
@@ -70,14 +70,16 @@ const App = ({ signOut }) => {
     if(!username){
       console.log("get username failed");
     }
+    const uuid = uuidv4();
     const data = {
+      id: uuid,
       name: form.get("name"),
       description: form.get("description"),
-      image: image.name,
+      image: uuid,
       owner: username,
     };
     if (!!data.image) await uploadData({
-      key: data.name,
+      key: uuid,
       data: image
     });
     await client.graphql({

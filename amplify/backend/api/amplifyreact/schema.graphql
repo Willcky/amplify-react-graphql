@@ -16,21 +16,23 @@ type Mutation {
 }
 
 type Note {
-    id: ID!
+    id: String!
     name: String!
     description: String
     image: String
-    owner: String
+    owner: String!
 }
 
 input CreateNoteInput {
+    id: String!
     name: String!
     description: String
     image: String
-    owner: String
+    owner: String!
 }
 
 input UpdateNoteInput {
+    id: String!
     name: String
     description: String
     image: String
