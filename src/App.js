@@ -44,7 +44,7 @@ const App = ({ signOut }) => {
     await Promise.all(
       notesFromAPI.map(async (note) => {
         if (note.image) {
-          const url = await getUrl({ key: note.name });
+          const url = await getUrl({ key: note.id });
           note.image = url.url;  
           console.log("fetch image: ", note.image)
         }
