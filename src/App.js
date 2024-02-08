@@ -39,7 +39,7 @@ const App = ({ signOut }) => {
     const apiData = await client.graphql({ 
       query: listNotes
     });
-    const notesFromAPI = apiData.data.listNotes.items;
+    const notesFromAPI = apiData.data.listNotes;
     
     await Promise.all(
       notesFromAPI.map(async (note) => {
